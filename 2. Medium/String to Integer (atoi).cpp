@@ -17,14 +17,14 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-using std::string;
+using namespace std;
 
 const string max_int_s = "2147483647";
 const string min_int_s = "2147483648";    // abs value, minus sign is assumed
 constexpr int max_int = 2147483647;
 constexpr int min_int = -2147483648;
 
-int myAtoi(string s)
+int myAtoi(const string& s)
 {
     if (s.empty()) return 0;
 
@@ -77,14 +77,16 @@ int myAtoi(string s)
     return sign ? -n : n;
 }
 
+//============================================================================//
+
 int main ()
 {
     string s;
     while (true) {
-        std::cout << "Input, please!\n";
+        cout << "Input, please!\n";
         string s;
-        std::cin >> s;
-        std::cout << myAtoi(s) << '\n';
+        cin >> s;
+        cout << "Here's your integer:\n" << myAtoi(s) << '\n';
     }    
     return 0;
 }

@@ -11,13 +11,13 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-using std::vector;
+using namespace std;
 
 vector<vector<int>> threeSum(vector<int>& nums)
 {
     if (nums.size() <= 1) return {};
     
-    std::sort(nums.begin(), nums.end());
+    sort(nums.begin(), nums.end());
     vector<vector<int>> result;
 
     for (size_t i{ 0 }; i < nums.size(); ++i) {
@@ -50,27 +50,29 @@ vector<vector<int>> threeSum(vector<int>& nums)
     return result;
 }
 
+//============================================================================//
+
 int main ()
 {
     while (true) {
-        std::cout << "Input, please! Length followed by elements:\n";
+        cout << "Input, please! Length followed by elements:\n";
         
         vector<int> nums;
         int n{ 0 };
         
-        std::cin >> n;
+        cin >> n;
         while (n--) {
             int x;
-            std::cin >> x;
+            cin >> x;
             nums.push_back(x);
         }
         
         for (const auto& index_set : threeSum(nums)) {
-            std::cout << "[ ";
+            cout << "[ ";
             for (auto x : index_set) {
-                std::cout << x  << ' ';
+                cout << x  << ' ';
             }
-            std::cout << "]\n";
+            cout << "]\n";
         }
     }
     return 0;

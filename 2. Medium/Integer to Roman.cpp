@@ -7,11 +7,12 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-using std::string;
+
+using namespace std;
 
 string digitToRomanTriplets(int digit, char high, char mid, char low)
 {
-    std::ostringstream roman;
+    ostringstream roman;
     if (digit == 9) {
         roman << low << high;
     }
@@ -56,14 +57,16 @@ string intToRoman(int num)
     return roman;
 }
 
+//============================================================================//
+
 int main ()
 {
     string s;
     while (true) {
-        std::cout << "Input, please!\n";
-        int n;
-        std::cin >> n;
-        std::cout << intToRoman(n) << '\n';
+        cout << "Input, please!\n";
+        int n{ };
+        cin >> n;
+        cout << intToRoman(n) << '\n';
     }    
     return 0;
 }

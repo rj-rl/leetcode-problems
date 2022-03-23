@@ -8,8 +8,7 @@
 #include <string>
 #include <map>
 
-using std::string;
-using std::map;
+using namespace std;
 
 // symmetrically grows a palindrome in 's' given by two indices: from 'from' to (and including) 'to'
 // until it ceases to be palindromic, returns maximal palindrome reached
@@ -28,7 +27,7 @@ Any palindrome within 's' must have a nucleus which is either a single character
 (depening on if the palindrome has an odd or even length). We scan through 's' and grow palindromes starting
 in every such nucleus, resulting in O(N^2) time complexity
 */
-string longestPalindrome(string s)
+string longestPalindrome(const string& s)
 {
     map<int, string> palindromes;
 
@@ -45,12 +44,15 @@ string longestPalindrome(string s)
     return palindromes.rbegin()->second;
 }
 
+//============================================================================//
+
 int main ()
 {
-    string input;
-    std::cout << "Please enter a string:\n";
-    std::cin >> input;
-    std::cout << longestPalindrome(input) << '\n';
-
+    while (true) {
+        string input;
+        cout << "Please enter a string:\n";
+        cin >> input;
+        cout << "Longest detected palindrome:\n" << longestPalindrome(input) << '\n';
+    }
     return 0;
 }

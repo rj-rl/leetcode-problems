@@ -1,15 +1,15 @@
-//==============================================================================================//
-//                                                                                              //
-//			https://leetcode.com/problems/longest-substring-without-repeating-characters/		//
-//                                                                                              //
-//==============================================================================================//
+//==============================================================================//
+//                                                                              //
+// https://leetcode.com/problems/longest-substring-without-repeating-characters //
+//                                                                              //
+//==============================================================================//
 
 #include <iostream>
 #include <string>
 
-using std::string;
+using namespace std;
 
-int lengthOfLongestSubstring(string s)
+int lengthOfLongestSubstring(const string& s)
 {
     bool contains[256] = {};
     size_t n = s.length();
@@ -29,14 +29,17 @@ int lengthOfLongestSubstring(string s)
     }
     return max;
 }
-    
-int main() {
-	string s;
-	while(true) {
-		std::cout << "Please enter a string:\n";
-		std::cin >> s;
-		std::cout << lengthOfLongestSubstring(s) << '\n';
-	}
 
-	return 0;
+//============================================================================//
+
+int main()
+{
+    string s;
+    while (true) {
+        cout << "Please enter a string:\n";
+        cin >> s;
+        cout << "Length of the longest substring without repeating chars is "
+            << lengthOfLongestSubstring(s) << '\n';
+    }
+    return 0;
 }

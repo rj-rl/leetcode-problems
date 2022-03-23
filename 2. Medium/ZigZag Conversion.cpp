@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 
-using std::string;
+using namespace std;
 
 // Returns the next index in a string following zigzag pattern DOWNWARDS
 // Assumes num_rows > 1
@@ -41,13 +41,15 @@ string convert(string s, int numRows)
     return res;
 }
 
+//============================================================================//
+
 int main ()
 {
     string input;
     int n{ 1 };
-    std::cout << "Please enter string and numRows:\n";
-    std::cin >> input >> n;
-    std::cout << convert(input, n);
+    cout << "Please enter string and numRows:\n";
+    cin >> input >> n;
+    cout << convert(input, n);
 
     return 0;
 }

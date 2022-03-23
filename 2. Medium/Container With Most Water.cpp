@@ -8,7 +8,7 @@
 #include <vector>
 #include <algorithm>
 
-using std::vector;
+using namespace std;
 
 /*            EXPLANATION
 
@@ -27,7 +27,7 @@ Say the left one is shorter and we move it one place to the right, possible scen
     it won't hurt, since we'd be looking for TWO new borders each taller than the old ones,
     otherwise the area wouldn't increase.
 */
-int maxArea(vector<int>& height)
+int maxArea(const vector<int>& height)
 {
     int max_area{ 0 };
     int l = 0, r = height.size() - 1;
@@ -43,14 +43,16 @@ int maxArea(vector<int>& height)
     return max_area;
 }
 
+//============================================================================//
+
 int main ()
 {
-    std::cout << "Input, please!\n";
+    cout << "Input, please!\n";
     vector<int> borders;    
-    for (int n{ 0 }; std::cin >> n;) {
+    for (int n{ 0 }; cin >> n;) {
         borders.push_back(n);
     }    
-    std::cout << maxArea(borders) << '\n';
+    cout << maxArea(borders) << '\n';
 
     return 0;
 }
