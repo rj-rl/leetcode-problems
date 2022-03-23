@@ -12,7 +12,7 @@
 #include <iostream>
 #include <vector>
 #include <limits>
-using std::vector;
+using namespace std;
 
 double median(const vector<int>& nums)
 {
@@ -25,13 +25,13 @@ double median(const vector<int>& nums)
 // return infinities for correct comparisons if out of bounds
 int leftElem(const vector<int>& nums, size_t i)
 {
-    if (i == 0) return std::numeric_limits<int>::min();
+    if (i == 0) return numeric_limits<int>::min();
     return nums[i - 1];
 }
 
 int rightElem(const vector<int>& nums, size_t i)
 {
-    if (i == nums.size()) return std::numeric_limits<int>::max();
+    if (i == nums.size()) return numeric_limits<int>::max();
     return nums[i];
 }
 
@@ -55,9 +55,9 @@ double findMedianSortedArrays(vector<int>& big, vector<int>& small)
         if (leftElem(small, cut_small) <= rightElem(big, cut_big)
             && leftElem(big, cut_big) <= rightElem(small, cut_small)) {
             return (n_big + n_small) % 2
-                ? std::max(leftElem(small, cut_small), leftElem(big, cut_big))
-                : (std::max(leftElem(small, cut_small), leftElem(big, cut_big))
-                    + std::min(rightElem(small, cut_small), rightElem(big, cut_big))) / 2.0;
+                ? max(leftElem(small, cut_small), leftElem(big, cut_big))
+                : (max(leftElem(small, cut_small), leftElem(big, cut_big))
+                    + min(rightElem(small, cut_small), rightElem(big, cut_big))) / 2.0;
         }
         else if (leftElem(big, cut_big) > rightElem(small, cut_small)) {
             from = cut_small + 1;
@@ -68,26 +68,28 @@ double findMedianSortedArrays(vector<int>& big, vector<int>& small)
     }
 }
 
+//============================================================================//
+
 int main ()
 {
     while (true) {
-        std::cout << "Input, please! Length followed by elements, for both vectors\n";
+        cout << "Input, please! Length followed by elements, for both vectors\n";
         vector<int> v1, v2;
         int n1{ 0 }, n2{ 0 };
-        std::cin >> n1;
+        cin >> n1;
         while (n1--) {
             int x;
-            std::cin >> x;
+            cin >> x;
             v1.push_back(x);
         }
-        std::cout << "and now the second\n";
-        std::cin >> n2;
+        cout << "and now the second\n";
+        cin >> n2;
         while (n2--) {
             int x;
-            std::cin >> x;
+            cin >> x;
             v2.push_back(x);
         }
-        std::cout << findMedianSortedArrays(v1, v2) << '\n';
+        cout << findMedianSortedArrays(v1, v2) << '\n';
     }    
     return 0;
 }
