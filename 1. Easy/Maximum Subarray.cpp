@@ -16,19 +16,17 @@ using namespace std;
 
 int maxSubArray(const vector<int>& nums)
 {
-    int l = 0;
-    int r = -1;
+    int r = 0;
     int n = nums.size();
     int max_sum = numeric_limits<int>::min();
     int running_sum = 0;
-    while (r < n - 1) {
-        ++r;
+    while (r < n) {
         running_sum += nums[r];
         max_sum = max(max_sum, running_sum);
         if (running_sum < 0) {
-            l = r;
             running_sum = 0;
         }
+        ++r;
     }
     return max_sum;
 }
