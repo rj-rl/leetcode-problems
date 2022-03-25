@@ -52,7 +52,7 @@ int main()
             costs[i].push_back(cost_B_i);
         }
         cout << "Minimum cost to fly everyone such that half the guys end up in A and another half in B is:\n";
-        cout << twoCitySchedCost(costs);
+        cout << twoCitySchedCost(costs) << '\n';
     }
     return 0;
 }
