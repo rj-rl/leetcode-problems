@@ -37,14 +37,14 @@ int main()
 {
     while (true) {
         vector<int> v;
-        cout << "enter vector:\n";
+        cout << "Enter vector:\n";
         int n;
         while (cin >> n) {
             v.push_back(n);
         }
         cin.clear();
 
-        cout << "\ntest result: "
+        cout << "\nTest result: "
             << maxSubArray(v)
             << '\n';
     }

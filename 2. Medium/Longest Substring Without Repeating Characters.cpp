@@ -14,7 +14,7 @@ int lengthOfLongestSubstring(const string& s)
     bool contains[256] = {};
     size_t n = s.length();
     int l = 0, r = 0;
-    int max = 0;
+    int max_len = 0;
 
     while (r < n) {
         if (contains[s[r]]) {
@@ -25,9 +25,9 @@ int lengthOfLongestSubstring(const string& s)
         }
         contains[s[r]] = true;
         ++r;
-        max = std::max(max, r - l);
+        max_len = std::max(max_len, r - l);
     }
-    return max;
+    return max_len;
 }
 
 //============================================================================//
