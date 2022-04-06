@@ -27,18 +27,20 @@ Say the left one is shorter and we move it one place to the right, possible scen
     it won't hurt, since we'd be looking for TWO new borders each taller than the old ones,
     otherwise the area wouldn't increase.
 */
-int maxArea(const vector<int>& height)
+int maxArea(const vector<int>& heights)
 {
     int max_area{ 0 };
-    int l = 0, r = height.size() - 1;
+    int left = 0;
+    int right = heights.size() - 1;
 
-    while (l < r) {
-        int height_to_beat = std::min(height[l], height[r]);
-        max_area = std::max(max_area, (r - l) * height_to_beat);
-        while (height[l] <= height_to_beat && l < r)
-            ++l;
-        while (height[r] <= height_to_beat && l < r)
-            --r;
+    while (left < right) {
+        int height_to_beat = min(heights[left], heights[right]);
+        max_area = max(max_area, (right - left) * height_to_beat);
+        
+        while (heights[left] <= height_to_beat && left < right)
+            ++left;
+        while (heights[right] <= height_to_beat && left < right)
+            --right;
     }
     return max_area;
 }
