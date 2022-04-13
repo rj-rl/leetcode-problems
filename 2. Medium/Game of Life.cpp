@@ -25,13 +25,14 @@ int count_neighbours(const vector<vector<int>>& board, int row, int col)
     int row_to   = min((int)board.size() - 1, row + 1);
     int col_to   = min((int)board[0].size() - 1, col + 1);
 
-    int neighbour_count = 0;
+    // init to minus central cell, because loops iterate over it and add it back
+    int neighbour_count = -board[row][col];
     for (int i = row_from; i <= row_to; ++i) {
         for (int j = col_from; j <= col_to; ++j) {
             if (restore(board, i, j) == 1) ++neighbour_count;
         }
     }
-    return neighbour_count - board[row][col];
+    return neighbour_count;
 }
 
 // converts each cell from intermediate state to final state
