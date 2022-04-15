@@ -30,7 +30,6 @@ bool isMatch(string s, string p)
     else return is_first_char_match && isMatch(s.substr(1), p.substr(1));
 }
 
-
 //===========================================================================//
 
 int main()
