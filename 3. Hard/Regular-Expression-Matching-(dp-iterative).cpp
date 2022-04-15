@@ -41,18 +41,18 @@ bool isMatch(string s, string p)
         for (int j = s_size - 1; j >= 0; --j) {
 
             if (p[i] == '*') {
-                bool is_star_match = p[i - 1] == s[j]  ||  p[i - 1] == '.';
+                bool is_asterisk_match = (p[i - 1] == s[j]) || (p[i - 1] == '.');
                 // i-1 because '...*' is a single token but two chars
                 memo[i - 1][j]
-                    = is_star_match && memo[i - 1][j + 1]   // use '...*' 1 or more times
+                    = is_asterisk_match && memo[i - 1][j + 1]  // use '...*' 1 or more times
                     || memo[i + 1][j];  // use '...*' token 0 times
             }
             else {
-                bool is_literal_or_dot_match = p[i] == s[j] || p[i] == '.';
+                bool is_literal_or_dot_match = (p[i] == s[j]) || (p[i] == '.');
                 memo[i][j] = is_literal_or_dot_match && memo[i + 1][j + 1];
             }
         }
-        if (p[i] == '*') --i;  // after dealing with * skip its second row (single token, 2 chars)
+        if (p[i] == '*') --i;  // after dealing with '...*', skip its second row (single token, 2 chars)
     }
 
     return memo[0][0];
