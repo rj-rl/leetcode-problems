@@ -62,8 +62,13 @@ inline TreeNode* from_string(const std::string& str)
     return root;
 }
 
-inline void print_BT(const std::string& prefix, const TreeNode* node, bool is_right,
-              bool is_first = false, std::ostream& out = std::cout)
+// prints a binary tree
+inline void print_BT(
+    const TreeNode* node,
+    const std::string& prefix,
+    bool is_right,
+    bool is_first = false,
+    std::ostream& out = std::cout)
 {
     if (!node) return;
     out << prefix;
@@ -78,11 +83,11 @@ inline void print_BT(const std::string& prefix, const TreeNode* node, bool is_ri
     out << node->val << '\n';
 
     // enter the next tree level - right and left branch
-    print_BT(prefix + (is_right ? "│   " : "    "), node->right, true);
-    print_BT(prefix + (is_right ? "│   " : "    "), node->left, false);
+    print_BT(node->right, prefix + (is_right ? "│   " : "    "),  true);
+    print_BT(node->left,  prefix + (is_right ? "│   " : "    "), false);
 }
 
 inline void print_BT(const TreeNode* node)
 {
-    print_BT("", node, false, true);
+    print_BT(node, "", false, true);
 }
