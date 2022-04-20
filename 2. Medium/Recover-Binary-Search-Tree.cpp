@@ -30,8 +30,11 @@ void recoverTree(TreeNode* root)
         cur = to_do.top();
         to_do.pop();
         if (prev && cur->val < prev->val) {
-            if (!first) first = prev;
             second = cur;
+            // if the first had been found, we're done now
+            if (first) break;
+            // otherwise we have a candidate pair, but keep looking for second
+            else first = prev;
         }
         prev = cur;
         cur = cur->right;
