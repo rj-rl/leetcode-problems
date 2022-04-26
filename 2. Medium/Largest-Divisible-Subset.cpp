@@ -2,9 +2,9 @@
   https://leetcode.com/problems/largest-divisible-subset/
 
   Given a set of distinct positive integers nums, return its largest subset
-  'answer', such that for every pair 'answer[i], answer[j]' either
-    'answer[i] % answer[j]' == 0, or
-    'answer[j] % answer[i]' == 0
+  'answer', such that for every pair 'answer[i], answer[j]'
+    either 'answer[i] % answer[j]' == 0
+    or     'answer[j] % answer[i]' == 0
   If there are multiple solutions, return any of them
 /**/
 
@@ -31,7 +31,7 @@ vector<int> largestDivisibleSubset(vector<int>& nums)
             return size < other.size;
         }
     };
-    // 'memo[i]' contains the size of the pairwise divisible set
+    // 'memo[i]' contains the size of the PD set
     // for which the max element is 'nums[i]';
     // it also contains the index of the second max element
     vector<SetInfo> memo(nums.size());
