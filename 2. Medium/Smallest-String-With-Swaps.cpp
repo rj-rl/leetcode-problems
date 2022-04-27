@@ -1,17 +1,20 @@
 /*
-  https://leetcode.com/problems/min-cost-to-connect-all-points/
+  https://leetcode.com/problems/smallest-string-with-swaps/
 
-  You are given an 'array' points representing integer coordinates
-  of some points on a 2D-plane.
+  You are given a string 's', and an array of pairs of indices 'pairs'
+  where 'pairs[i] = [a, b]' indicates 2 indices of the string 's'.
+  For every pair '[a, b]' in 'pairs' you can swap 's[a]' and 's[b]'
+  any number of times.
 
-  Return the minimum cost to make all points connected. The cost of connecting
-  two points is the manhattan distance between them. All points are connected
-  if there is exactly one simple path between any two points
+  Return the lexicographically smallest string that 's' can be
+  morphed into by swapping the pairs defined by 'pairs'
 /**/
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <queue>
+#include <unordered_map>
 #include <utility>
 #include <cassert>
 
@@ -86,72 +89,46 @@ private:
     std::size_t component_count_;              // number of components
 };
 
-struct Edge {
-    size_t start = 0;
-    size_t end = 0;
-    int weight = 0;
-
-    Edge(size_t s, size_t e, int w)
-        : start {s}, end {e}, weight {w}
-    { }
-};
-
-int distance(int x_a, int y_a, int x_b, int y_b)
+string smallestStringWithSwaps(string s, const vector<vector<int>>& pairs)
 {
-    return abs(x_a - x_b) + abs(y_a - y_b);
-}
-
-int minCostConnectPoints(const vector<vector<int>>& points)
-{
-    size_t vertice_count = points.size();
-    if (vertice_count < 2) return 0;
-
-    vector<Edge> edges;
-    for (size_t i = 0; i < vertice_count; ++i) {
-        for (size_t j = i + 1; j < vertice_count; ++j) {
-            edges.emplace_back(
-                i, j,
-                distance(points[i][0], points[i][1],
-                         points[j][0], points[j][1])
-            );
-        }
+    // build the disjoint set forest of unified components
+    DisjointSet components(s.length());
+    for (auto& pair : pairs) {
+        components.unify(pair[0], pair[1]);
     }
 
-    auto comp = [](const Edge& a, const Edge& b)
-        {
-            return a.weight > b.weight;
-        };
-    make_heap(begin(edges), end(edges), comp);
-
-    DisjointSet components(vertice_count);
-    auto edge = edges.front();
-    pop_heap(begin(edges), end(edges), comp);
-    edges.pop_back();
-
-    components.unify(edge.start, edge.end);
-    int min_cost_path = edge.weight;
-    size_t initial = edge.start;
-
-    while (components.count() > 1) {
-        auto edge = edges.front();
-        pop_heap(begin(edges), end(edges), comp);
-        edges.pop_back();
-        if (!components.connected(edge.start, edge.end)) {
-            components.unify(edge.start, edge.end);
-            min_cost_path += edge.weight;
-        }
+    // build the heap for the root of each tree;
+    // these heaps are then used to sort substrings corresponding to components
+    unordered_map<
+        size_t, 
+        priority_queue<char, vector<char>, greater<>>
+        > heapified_components;
+    for (size_t i = 0u; i < s.length(); ++i) {
+        auto root = components.find(i);
+        heapified_components[root].push(s[i]);
     }
-    return min_cost_path;
+
+    // construct the string out of the sorted substrings
+    for (size_t i = 0u; i < s.length(); ++i) {
+        auto root = components.find(i);
+        s[i] = heapified_components[root].top();
+        heapified_components[root].pop();
+    }
+    return s;
 }
 
 //==============================================================================================//
 
 int main()
 {
-    while (true) {
-        vector<vector<int>> input;
-        // TODO ask for input
-        cout << minCostConnectPoints(input) << '\n';
-    }
+    // TODO: ask for input, present the output
+    string input_s = "dcab";
+    vector<vector<int>> input = 
+        {{0, 3},
+         {1, 2},
+         {0, 2}
+        };
+    cout << smallestStringWithSwaps(input_s, input) << '\n';
+
     return 0;
 }
